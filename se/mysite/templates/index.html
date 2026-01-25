@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Image Slider</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            font-family: Arial;
+        }
+
+        .slider {
+            position: relative;
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .slides img {
+            width: 500px;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="slider">
+    <div class="slides" id="slides">
+        <img src="{{ url_for('static', filename='images/img1.jpg') }}">
+        <img src="{{ url_for('static', filename='images/img2.jpg') }}">
+        <img src="{{ url_for('static', filename='images/img3.jpg') }}">
+    </div>
+
+    <button class="btn prev" onclick="prev()">❮</button>
+    <button class="btn next" onclick="next()">❯</button>
+</div>
+
+<script>
+let index = 0;
+const slides = document.getElementById("slides");
+const total = slides.children.length;
+
+function update() {
+    slides.style.transform = `translateX(-${index * 500}px)`;
+}
+
+function next() {
+    index = (index + 1) % total;
+    update();
+}
+
+function prev() {
+    index = (index - 1 + total) % total;
+    update();
+}
+</script>
+
+</body>
+</html>
