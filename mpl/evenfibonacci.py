@@ -4,10 +4,19 @@
 # By considering the terms in the Fibonacci sequence whose values do not exceed four million,
 # find the sum of the even-valued terms.
 
-
-
 def even_fibonacci(limit):
-    fib=1
+    a, b = 1, 2
+    total = 0
     
-    while fib<limit:
-        fib= fib+fib
+    while a <= limit:
+        
+        if a % 2 == 0:
+            total += a
+        
+        
+        a, b = b, a + b
+    
+    return total
+
+result = even_fibonacci(4000000)
+print(f"Sum of even-valued Fibonacci terms not exceeding four million: {result}")

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """Very small utility: compare two integers and print which is biggest.
 
 Usage:
