@@ -1,82 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Image Slider</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            margin-top: 40px;
-            font-family: Arial;
-        }
-
-        .slider {
-            position: relative;
-            width: 500px;
-            height: 300px;
-            overflow: hidden;
-            border-radius: 10px;
-        }
-
-        .slides {
-            display: flex;
-            transition: transform 0.4s ease;
-        }
-
-        .slides img {
-            width: 500px;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.6);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .prev { left: 10px; }
-        .next { right: 10px; }
-    </style>
+<meta charset="UTF-8">
+<title>Image Slider</title>
+<style>
+:root {
+    --img-width: 80vw; /* 80% of viewport width */
+    --img-height: 70vh; /* 70% of viewport height */
+}
+body {
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+margin: 0;
+font-family: Arial;
+background: #111;
+}
+.slider {
+position: relative;
+width: var(--img-width);
+height: var(--img-height);
+overflow: hidden;
+border-radius: 15px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+.slides {
+display: flex;
+transition: transform 0.5s ease;
+height: 100%;
+}
+.slides img {
+width: var(--img-width);
+height: var(--img-height);
+object-fit: cover;
+flex-shrink: 0;
+}
+.btn {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background: rgba(0,0,0,0.8);
+color: white;
+border: none;
+padding: 20px 15px;
+cursor: pointer;
+font-size: 28px;
+transition: background 0.2s;
+}
+.btn:hover {
+background: rgba(0,0,0,0.9);
+}
+.prev {
+left: 0;
+border-radius: 0 8px 8px 0;
+}
+.next {
+right: 0;
+border-radius: 8px 0 0 8px;
+}
+</style>
 </head>
 <body>
-
 <div class="slider">
-    <div class="slides" id="slides">
-        <img src="{{ url_for('static', filename='images/img1.jpg') }}">
-        <img src="{{ url_for('static', filename='images/img2.jpg') }}">
-        <img src="{{ url_for('static', filename='images/img3.jpg') }}">
-    </div>
-
-    <button class="btn prev" onclick="prev()">❮</button>
-    <button class="btn next" onclick="next()">❯</button>
+<div class="slides" id="slides">
+<img src="{{ url_for('static', filename='images/img1.jpg') }}">
+<img src="{{ url_for('static', filename='images/img2.jpg') }}">
+<img src="{{ url_for('static', filename='images/img3.jpg') }}">
 </div>
-
+<button class="btn prev" onclick="prev()">❮</button>
+<button class="btn next" onclick="next()">❯</button>
+</div>
 <script>
 let index = 0;
 const slides = document.getElementById("slides");
 const total = slides.children.length;
+const imgWidth = 800;
 
 function update() {
-    slides.style.transform = `translateX(-${index * 500}px)`;
+slides.style.transform = `translateX(-${index * imgWidth}px)`;
 }
-
 function next() {
-    index = (index + 1) % total;
-    update();
+index = (index + 1) % total;
+update();
 }
-
 function prev() {
-    index = (index - 1 + total) % total;
-    update();
+index = (index - 1 + total) % total;
+update();
 }
 </script>
-
 </body>
 </html>
