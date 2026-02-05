@@ -6,10 +6,10 @@ def count_words(txt_file):
 
         return len(words)
     
-
-
 #-----------------------------------------
 
+
+# hiç bir şey deigl
 def find_and_replace(txt_file, target_word, replacement_word):
     with open(txt_file, 'r') as file:
         content = file.read()
@@ -25,5 +25,6 @@ print(count_words("abd.txt"))
 
 print(find_and_replace("abd.txt", "Warsaw", "Cracow"))
 
-content = "ala ma kota ala ma kota"
-print(content.count("ala"))
+content = "orama koma burama koma"
+
+print(content.count("orama"))
